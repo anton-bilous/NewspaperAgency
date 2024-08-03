@@ -21,4 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("newspapers.urls", namespace="newspapers")),
+    path("", include("admin_gradient.urls")),
 ]
