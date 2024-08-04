@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Redactor
+from .models import Redactor, Topic
 
 
 @admin.register(Redactor)
@@ -24,3 +24,8 @@ class RedactorAdmin(UserAdmin):
             ),
         )
     )
+
+
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    search_fields = ("name",)
