@@ -1,4 +1,6 @@
+from django.views import generic
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Redactor, Topic, Newspaper
 
@@ -10,3 +12,8 @@ def index(request):
         "num_newspapers": Newspaper.objects.count(),
     }
     return render(request, "newspapers/index.html", context=context)
+
+
+class RedactorListView(LoginRequiredMixin, generic.ListView):
+    model = Redactor
+    paginate_by = 10
