@@ -36,4 +36,5 @@ class TopicCreateView(LoginRequiredMixin, generic.CreateView):
 
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
+    paginate_by = 10
     queryset = Newspaper.objects.select_related("topic")
