@@ -32,3 +32,8 @@ class TopicCreateView(LoginRequiredMixin, generic.CreateView):
     model = Topic
     fields = ("name",)
     success_url = reverse_lazy("newspapers:topics")
+
+
+class NewspaperListView(LoginRequiredMixin, generic.ListView):
+    model = Newspaper
+    queryset = Newspaper.objects.select_related("topic")
