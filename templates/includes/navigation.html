@@ -33,7 +33,13 @@
                         <div class="pro-head">
                             <img src="{% static 'assets/images/user/avatar-1.jpg' %}" class="img-radius"
                                 alt="User-Profile-Image">
-                            <span>{{ user.first_name }} {{ user.last_name }}</span>
+                            <span>
+                                {% if user.first_name or user.last_name %}
+                                    {{ user.first_name }} {{ user.last_name }}
+                                {% else %}
+                                    {{ user.username }}
+                                {% endif %}
+                            </span>
                         </div>
                         <ul class="pro-body">
                             {% if request.user.is_authenticated %}
