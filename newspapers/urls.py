@@ -1,6 +1,12 @@
 from django.urls import path
 
-from .views import index, RedactorListView, RedactorDetailView, TopicListView
+from .views import (
+    index,
+    RedactorListView,
+    RedactorDetailView,
+    TopicListView,
+    TopicCreateView,
+)
 
 
 app_name = "newspapers"
@@ -14,4 +20,5 @@ urlpatterns = [
         name="redactor-detail",
     ),
     path("topics/", TopicListView.as_view(), name="topics"),
+    path("topics/create/", TopicCreateView.as_view(), name="topic-create"),
 ]
