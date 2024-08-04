@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Redactor(AbstractUser):
-    years_of_experience = models.IntegerField()
+    years_of_experience = models.IntegerField(default=0)
 
 
 class Topic(models.Model):
