@@ -21,3 +21,7 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
+
+
+class TopicListView(LoginRequiredMixin, generic.ListView):
+    model = Topic
