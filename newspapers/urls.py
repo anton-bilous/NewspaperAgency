@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import index, RedactorListView, RedactorDetailView
+from .views import index, RedactorListView, RedactorDetailView, TopicListView
 
 
 app_name = "newspapers"
@@ -13,4 +13,5 @@ urlpatterns = [
         RedactorDetailView.as_view(),
         name="redactor-detail",
     ),
+    path("topics/", TopicListView.as_view(), name="topics"),
 ]
