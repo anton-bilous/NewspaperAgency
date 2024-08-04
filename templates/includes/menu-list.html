@@ -55,7 +55,7 @@
     <label>Other</label>
   </li>
   <li class="nav-item">
-    <a href="{% url 'user_profile' %}" class="nav-link "><span class="pcoded-micon"><i
+    <a href="{% url 'newspapers:redactor-detail' request.user.id %}" class="nav-link "><span class="pcoded-micon"><i
           class="feather icon-user"></i></span><span class="pcoded-mtext">User Profile</span></a>
   </li>
   <li class="nav-item pcoded-hasmenu">
