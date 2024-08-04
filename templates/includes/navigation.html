@@ -33,14 +33,9 @@
                         <div class="pro-head">
                             <img src="{% static 'assets/images/user/avatar-1.jpg' %}" class="img-radius"
                                 alt="User-Profile-Image">
-                            <span>John Doe</span>
+                            <span>{{ user.first_name }} {{ user.last_name }}</span>
                         </div>
                         <ul class="pro-body">
-                            <li class="bg-transparent mb-2 ms-3">
-                                <a target="_blank" href="https://appseed.us/support/">
-                                    <span class="badge bg-primary">Support</span>
-                                </a>
-                            </li>
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
                                 <li><a href="{% url 'admin:password_change' %}" class="dropdown-item">
