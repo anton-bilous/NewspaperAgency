@@ -26,13 +26,15 @@
         </a>
     </div>
     <div class="col-md-6 col-xl-3">
-        <div class="card bg-c-yellow order-card">
-            <div class="card-body">
-                <h6 class="text-white">Newspapers</h6>
-                <h2 class="text-end text-white"><i
-                        class="feather icon-file-text float-start"></i><span>{{ num_newspapers }}</span></h2>
+        <a href="{% url 'newspapers:newspapers' %}">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-body">
+                    <h6 class="text-white">Newspapers</h6>
+                    <h2 class="text-end text-white"><i
+                            class="feather icon-file-text float-start"></i><span>{{ num_newspapers }}</span></h2>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="card bg-c-red order-card">
