@@ -5,24 +5,28 @@
 <!-- profile header start -->
 <div class="user-profile user-card mb-4">
     <div class="card-header border-0 p-0 pb-0">
-        <div class="cover-img-block">
-            <img src="{% static 'assets/images/user/cover.jpg' %}" alt="" class="img-fluid">
-            <div class="overlay"></div>
-            <div class="change-cover">
-                <div class="dropdown">
-                    <a class="drp-icon dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"><i class="icon feather icon-camera"></i></a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#"><i class="feather icon-upload-cloud me-2"></i>upload
-                            new</a>
-                        <a class="dropdown-item" href="#"><i class="feather icon-image me-2"></i>from photos</a>
-                        <a class="dropdown-item" href="#"><i class="feather icon-film me-2"></i> upload
-                            video</a>
-                        <a class="dropdown-item" href="#"><i class="feather icon-trash-2 me-2"></i>remove</a>
+        {% if redactor == request.user %}
+            <div class="cover-img-block">
+                <img src="{% static 'assets/images/user/cover.jpg' %}" alt="" class="img-fluid">
+                <div class="overlay"></div>
+                <div class="change-cover">
+                    <div class="dropdown">
+                        <a class="drp-icon dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><i class="icon feather icon-camera"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="feather icon-upload-cloud me-2"></i>upload
+                                new</a>
+                            <a class="dropdown-item" href="#"><i class="feather icon-image me-2"></i>from photos</a>
+                            <a class="dropdown-item" href="#"><i class="feather icon-film me-2"></i> upload
+                                video</a>
+                            <a class="dropdown-item" href="#"><i class="feather icon-trash-2 me-2"></i>remove</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <img src="{% static 'assets/images/user/cover.jpg' %}" alt="" class="img-fluid">
+        {% endif %}
     </div>
     <div class="card-body pt-0">
         <div class="user-about-block m-0">
