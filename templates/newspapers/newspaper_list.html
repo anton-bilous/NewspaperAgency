@@ -47,7 +47,7 @@
                             {% for newspaper in newspaper_list %}
                                 <tr>
                                     <td>{{ newspaper.id }}</td>
-                                    <td><a href="#">
+                                    <td><a href="{% url 'newspapers:newspaper-detail' newspaper.id %}">
                                         {{ newspaper.title }}
                                     </a></td>
                                     <td>{{ newspaper.topic.name }}</td>
