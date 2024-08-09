@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Redactor, Topic, Newspaper
+from .forms import NewspaperForm
 
 
 def index(request):
@@ -42,3 +43,9 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
+
+
+class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
+    template_name = "newspapers/newspaper_form.html"
+    form_class = NewspaperForm
+    success_url = reverse_lazy("newspapers:newspapers")
