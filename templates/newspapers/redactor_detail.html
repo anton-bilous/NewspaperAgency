@@ -41,25 +41,29 @@
                                         <img class="img-radius img-fluid wid-100"
                                             src="{% static 'assets/images/user/avatar-5.jpg' %}" alt="User image">
                                     </div>
-                                    <div class="overlay">
-                                        <span>change</span>
-                                    </div>
+                                    {% if redactor == request.user %}
+                                        <div class="overlay">
+                                            <span>change</span>
+                                        </div>
+                                    {% endif %}
                                 </div>
                                 <div class="certificated-badge">
                                     <i class="fas fa-certificate text-c-blue bg-icon"></i>
                                     <i class="fas fa-check front-icon text-white"></i>
                                 </div>
                             </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i
-                                        class="feather icon-upload-cloud me-2"></i>upload new</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-image me-2"></i>from
-                                    photos</a>
-                                <a class="dropdown-item" href="#"><i
-                                        class="feather icon-shield me-2"></i>Protact</a>
-                                <a class="dropdown-item" href="#"><i
-                                        class="feather icon-trash-2 me-2"></i>remove</a>
-                            </div>
+                            {% if redactor == request.user %}
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#"><i
+                                            class="feather icon-upload-cloud me-2"></i>upload new</a>
+                                    <a class="dropdown-item" href="#"><i class="feather icon-image me-2"></i>from
+                                        photos</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="feather icon-shield me-2"></i>Protact</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="feather icon-trash-2 me-2"></i>remove</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <h5 class="mb-1">{{ redactor.first_name }} {{ redactor.last_name }}</h5>
