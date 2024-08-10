@@ -356,7 +356,7 @@ function floatchart() {
         chart.render();
     })();
     // [ customer-chart ] end
-    // [ unique-visitor-chart ] start
+    // [ newspapers-chart ] start
     let counts = document.getElementById("newspaper_counts").value.split(" ").map(Number);
     counts.pop();
     let dates = document.getElementById("dates").value.split(" ");
@@ -436,8 +436,8 @@ function floatchart() {
                 borderColor: '#cccccc3b',
             }
         }
-        var chart = new ApexCharts(document.querySelector("#unique-visitor-chart"), options);
+        var chart = new ApexCharts(document.querySelector("#newspapers-chart"), options);
         chart.render();
     })();
-    // [ unique-visitor-chart ] end
+    // [ newspapers-chart ] end
 }
