@@ -357,6 +357,11 @@ function floatchart() {
     })();
     // [ customer-chart ] end
     // [ unique-visitor-chart ] start
+    let counts = document.getElementById("newspaper_counts").value.split(" ").map(Number);
+    counts.pop();
+    let dates = document.getElementById("dates").value.split(" ");
+    dates.pop();
+    dates = dates.map(value => (new Date(value)).getTime());
     (function () {
         var options = {
             chart: {
@@ -374,18 +379,15 @@ function floatchart() {
                 curve: 'smooth'
             },
             series: [{
-                name: 'Arts',
-                data: [20, 50, 30, 60, 30, 50]
-            }, {
-                name: 'Commerce',
-                data: [60, 30, 65, 45, 67, 30]
+                name: 'Newspapers',
+                data: counts
             }],
             legend: {
                 position: 'top',
             },
             xaxis: {
                 type: 'datetime',
-                categories: ['1/11/2000', '2/11/2000', '3/11/2000', '4/11/2000', '5/11/2000', '6/11/2000'],
+                categories: dates,
                 axisBorder: {
                     show: false,
                 },
@@ -397,11 +399,14 @@ function floatchart() {
             },
             yaxis: {
                 show: true,
-                min: 10,
-                max: 70,
+                min: 0,
+                max: Math.max(...counts),
                 labels: {
                     style: {
                         color: '#ccc'
+                    },
+                    formatter: function(val) {
+                        return val.toFixed(0);
                     }
                 }
             },
