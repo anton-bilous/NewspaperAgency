@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.views import generic
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -8,10 +10,22 @@ from .forms import NewspaperForm, RedactorSearchForm, NewspaperSearchForm
 
 
 def index(request):
+    now = date.today()
+    dates = []
+    counts = []
+    for day in range(6, -1, -1):
+        day_to_check = now - timedelta(days=day)
+        dates.append(day_to_check.strftime("%Y-%m-%d"))
+        counts.append(
+            Newspaper.objects.filter(published_date=day_to_check).count()
+        )
+
     context = {
         "num_redactors": Redactor.objects.count(),
         "num_topics": Topic.objects.count(),
         "num_newspapers": Newspaper.objects.count(),
+        "dates": dates,
+        "newspaper_counts": counts,
     }
     return render(request, "newspapers/index.html", context=context)
 
