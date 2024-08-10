@@ -17,3 +17,7 @@ class NewspaperForm(forms.ModelForm):
 
 class RedactorSearchForm(forms.Form):
     username = forms.CharField(max_length=255, required=False, label="")
+
+
+class NewspaperSearchForm(forms.Form):
+    title = forms.CharField(max_length=255, required=False, label="")
