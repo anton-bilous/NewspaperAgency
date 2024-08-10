@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("", include("newspapers.urls", namespace="newspapers")),
+    path("admin/", admin.site.urls),
     path("", include("admin_gradient.urls")),
 ]
