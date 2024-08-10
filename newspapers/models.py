@@ -62,3 +62,8 @@ class Newspaper(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class VisitCounter(SingletonModel):
+    total_count = models.IntegerField(default=0)
+    logged_in_count = models.IntegerField(default=0)
