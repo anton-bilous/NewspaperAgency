@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Redactor, Topic, Newspaper
-from .forms import NewspaperForm, RedactorSearchForm
+from .forms import NewspaperForm, RedactorSearchForm, NewspaperSearchForm
 
 
 def index(request):
@@ -56,7 +56,20 @@ class TopicCreateView(LoginRequiredMixin, generic.CreateView):
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     paginate_by = 2
-    queryset = Newspaper.objects.select_related("topic")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        title = self.request.GET.get("title", "")
+        context["search_form"] = NewspaperSearchForm(initial={"title": title})
+        return context
+
+    def get_queryset(self):
+        form = NewspaperSearchForm(self.request.GET)
+
+        queryset = Newspaper.objects.select_related("topic")
+        if form.is_valid():
+            return queryset.filter(title__icontains=form.cleaned_data["title"])
+        return queryset
 
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
