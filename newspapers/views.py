@@ -5,11 +5,16 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Redactor, Topic, Newspaper
+from .models import Redactor, Topic, Newspaper, VisitCounter
 from .forms import NewspaperForm, RedactorSearchForm, NewspaperSearchForm
 
 
 def index(request):
+    visit_counter = VisitCounter.load()
+    visit_counter.total_count += 1
+    visit_counter.logged_in_count += request.user.is_authenticated
+    visit_counter.save()
+
     now = date.today()
     dates = []
     counts = []
@@ -26,6 +31,10 @@ def index(request):
         "num_newspapers": Newspaper.objects.count(),
         "dates": dates,
         "newspaper_counts": counts,
+        "total_visit_count": visit_counter.total_count,
+        "logged_in_visit_count": visit_counter.logged_in_count,
+        "anonymous_visit_count": visit_counter.total_count
+        - visit_counter.logged_in_count,
     }
     return render(request, "newspapers/index.html", context=context)
 
