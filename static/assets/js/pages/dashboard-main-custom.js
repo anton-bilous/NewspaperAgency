@@ -270,7 +270,7 @@ function floatchart() {
         new ApexCharts(document.querySelector("#seo-card1"), options1).render();
     })();
     // [ seo-card1 ] end
-    // [ customer-chart ] start
+    // [ visits-chart ] start
     (function () {
         var options = {
             chart: {
@@ -287,8 +287,11 @@ function floatchart() {
                     }
                 }
             },
-            labels: ['New', 'Return'],
-            series: [39, 10],
+            labels: ['Logged in', 'Anonymous'],
+            series: [
+                Number(document.getElementById("logged_in_visit_count").innerHTML),
+                Number(document.getElementById("anonymous_visit_count").innerHTML)
+            ],
             legend: {
                 show: false
             },
@@ -303,7 +306,7 @@ function floatchart() {
                     left: 0
                 },
             },
-            colors: ["#4680ff", "#2ed8b6"],
+            colors: ["#2ed8b6", "#4680ff"],
             fill: {
                 opacity: [1, 1]
             },
@@ -311,7 +314,7 @@ function floatchart() {
                 width: 0,
             }
         }
-        var chart = new ApexCharts(document.querySelector("#customer-chart"), options);
+        var chart = new ApexCharts(document.querySelector("#visits-chart"), options);
         chart.render();
         var options1 = {
             chart: {
@@ -352,10 +355,10 @@ function floatchart() {
                 width: 0,
             }
         }
-        var chart = new ApexCharts(document.querySelector("#customer-chart1"), options1);
+        var chart = new ApexCharts(document.querySelector("#visits-chart1"), options1);
         chart.render();
     })();
-    // [ customer-chart ] end
+    // [ visits-chart ] end
     // [ newspapers-chart ] start
     let counts = document.getElementById("newspaper_counts").value.split(" ").map(Number);
     counts.pop();
