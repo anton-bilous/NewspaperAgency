@@ -13,3 +13,7 @@ class NewspaperForm(forms.ModelForm):
     class Meta:
         model = Newspaper
         exclude = ()
+
+
+class RedactorSearchForm(forms.Form):
+    username = forms.CharField(max_length=255, required=False, label="")
