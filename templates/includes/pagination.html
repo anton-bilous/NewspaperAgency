@@ -1,4 +1,5 @@
 {% load i18n admin_gradient %}
+{% load static %}
 {% load query_transform %}
 {% load get_values_around %}
 
@@ -14,9 +15,15 @@
                     {% endif %}
                 </li>
                 {% for i in paginator.page_range|get_values_around:page_obj.number %}
-                    <li class="page-item {% if i == page_obj.number %}active{% endif %}">
-                      <a class="page-link" href="?{% query_transform request page=i %}">{{ i }}</a>
-                    </li>
+                    {% if i == page_obj.number %}
+                        <li class="page-item active">
+                            <input id="current-page-input" oninput="adjustWidth(this)" class="page-link" size="1" value="{{ i }}">
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% query_transform request page=i %}">{{ i }}</a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 <li class="page-item">
                     {% if page_obj.number < paginator.num_pages %}
@@ -37,4 +44,5 @@
             out of <b>{{ paginator.object_list|length }}</b> entries
         </div>
     </div>
+    <script src="{% static 'assets/js/pages/pagination-input.js' %}"></script>
 {% endif %}
