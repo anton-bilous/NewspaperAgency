@@ -40,12 +40,21 @@ class SingletonModel(models.Model):
             return cls()
 
 
+def check_non_empty(field_name: str) -> models.CheckConstraint:
+    return models.CheckConstraint(
+        check=~models.Q(field_name, ""), name=f"non_empty_{field_name}"
+    )
+
+
 class Redactor(AbstractUser):
     years_of_experience = models.IntegerField(default=0)
 
 
 class Topic(models.Model):
     name = models.CharField(max_length=255, unique=True)
+
+    class Meta:
+        constraints = [check_non_empty("name")]
 
     def __str__(self) -> str:
         return self.name
