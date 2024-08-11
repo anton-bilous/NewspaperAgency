@@ -69,6 +69,9 @@ class Newspaper(models.Model):
     )
     publishers = models.ManyToManyField(Redactor, related_name="newspapers")
 
+    class Meta:
+        constraints = [check_non_empty("title"), check_non_empty("content")]
+
     def __str__(self) -> str:
         return self.title
 
