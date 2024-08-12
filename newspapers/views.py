@@ -78,7 +78,7 @@ class TopicCreateView(LoginRequiredMixin, generic.CreateView):
 
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
-    paginate_by = 2
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
