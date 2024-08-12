@@ -2,8 +2,15 @@ from bs4 import BeautifulSoup
 from django.urls import reverse
 from django.test import TestCase
 from django.db import IntegrityError
+from django.contrib.auth import get_user_model
 
 from .models import Topic, Newspaper
+
+
+DEFAULT_USER_DATA = {
+    "username": "testorius",
+    "password": "c3VzYW1vZ3Vz",
+}
 
 
 class TestTopicModel(TestCase):
@@ -48,3 +55,20 @@ class PublicTestIndexView(TestCase):
         response = self.client.get(url)
         bs = BeautifulSoup(response.content, "html.parser")
         self.assertEqual(bs.find(id="anonymous_visit_count").text, "2")
+
+
+class PrivateTestIndexView(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(**DEFAULT_USER_DATA)
+        self.client.force_login(self.user)
+
+    def test_logged_in_visit_counter(self):
+        url = reverse("newspapers:index")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        bs = BeautifulSoup(response.content, "html.parser")
+        self.assertEqual(bs.find(id="logged_in_visit_count").text, "1")
+
+        response = self.client.get(url)
+        bs = BeautifulSoup(response.content, "html.parser")
+        self.assertEqual(bs.find(id="logged_in_visit_count").text, "2")
