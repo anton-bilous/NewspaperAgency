@@ -74,6 +74,7 @@ class Newspaper(models.Model):
 
     class Meta:
         constraints = [check_non_empty("title"), check_non_empty("content")]
+        ordering = ("title",)
 
     def __str__(self) -> str:
         return self.title
