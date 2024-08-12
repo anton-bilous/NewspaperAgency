@@ -49,6 +49,9 @@ def check_non_empty(field_name: str) -> models.CheckConstraint:
 class Redactor(AbstractUser):
     years_of_experience = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ("username",)
+
 
 class Topic(models.Model):
     name = models.CharField(max_length=255, unique=True)
