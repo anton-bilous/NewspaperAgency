@@ -23,3 +23,13 @@ class TestNewspaperModel(TestCase):
             title=title, content="Abc", topic=topic
         )
         self.assertEqual(str(newspaper), title)
+
+    def test_cant_create_newspaper_with_empty_title(self):
+        topic = Topic.objects.create(name="Test topic")
+        with self.assertRaises(IntegrityError):
+            Newspaper.objects.create(title="", content="Abc", topic=topic)
+
+    def test_cant_create_newspaper_with_empty_content(self):
+        topic = Topic.objects.create(name="Test topic")
+        with self.assertRaises(IntegrityError):
+            Newspaper.objects.create(title="Test", content="", topic=topic)
