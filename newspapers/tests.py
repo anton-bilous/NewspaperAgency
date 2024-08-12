@@ -124,3 +124,10 @@ class PublicTestTopicListView(TestCase):
         url = reverse("newspapers:topics")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
+
+
+class PublicTestTopicCreateView(TestCase):
+    def test_login_required(self):
+        url = reverse("newspapers:topic-create")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
