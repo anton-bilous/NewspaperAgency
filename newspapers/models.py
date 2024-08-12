@@ -42,7 +42,7 @@ class SingletonModel(models.Model):
 
 def check_non_empty(field_name: str) -> models.CheckConstraint:
     return models.CheckConstraint(
-        check=~models.Q(field_name, ""), name=f"non_empty_{field_name}"
+        check=~models.Q((field_name, "")), name=f"non_empty_{field_name}"
     )
 
 
