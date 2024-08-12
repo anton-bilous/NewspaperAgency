@@ -138,3 +138,22 @@ class PublicTestNewspaperListView(TestCase):
         url = reverse("newspapers:newspapers")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
+
+
+class PrivateTestNewspaperListView(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(**DEFAULT_USER_DATA)
+        self.client.force_login(self.user)
+
+    def test_search(self):
+        title1 = "Test newspaper"
+        title2 = "Repapswen tset"
+        topic = Topic.objects.create(name="Test topic")
+        Newspaper.objects.create(title=title1, topic=topic, content="Abc")
+        Newspaper.objects.create(title=title2, topic=topic, content="Cba")
+
+        url = reverse("newspapers:newspapers")
+        response = self.client.get(url, {"title": "test"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, title1)
+        self.assertNotContains(response, title2)
