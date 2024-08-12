@@ -58,6 +58,7 @@ class Topic(models.Model):
 
     class Meta:
         constraints = [check_non_empty("name")]
+        ordering = ("name",)
 
     def __str__(self) -> str:
         return self.name
