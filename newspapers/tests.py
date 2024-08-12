@@ -56,6 +56,16 @@ class PublicTestIndexView(TestCase):
         bs = BeautifulSoup(response.content, "html.parser")
         self.assertEqual(bs.find(id="anonymous_visit_count").text, "2")
 
+    def test_correct_newspapers_count(self):
+        url = reverse("newspapers:index")
+        topic = Topic.objects.create(name="Test topic")
+        Newspaper.objects.create(title="Test", topic=topic, content="Abc")
+
+        response = self.client.get(url)
+        self.assertEqual(
+            response.context["newspaper_counts"], [0, 0, 0, 0, 0, 0, 1]
+        )
+
 
 class PrivateTestIndexView(TestCase):
     def setUp(self):
