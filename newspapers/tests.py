@@ -89,3 +89,24 @@ class PublicTestRedactorListView(TestCase):
         url = reverse("newspapers:redactors")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
+
+
+class PrivateTestRedactorListView(TestCase):
+    def setUp(self):
+        self.username1 = DEFAULT_USER_DATA["username"]
+        self.username2 = "debugius"
+        self.user1 = get_user_model().objects.create_user(**DEFAULT_USER_DATA)
+        self.user2 = get_user_model().objects.create_user(
+            {
+                "username": self.username2,
+                "password": "YnVncyBhcmUgYW1vbmcgdXMh",
+            }
+        )
+        self.client.force_login(self.user1)
+
+    def test_search(self):
+        url = reverse("newspapers:redactors")
+        response = self.client.get(url, {"username": "test"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.username1)
+        self.assertNotContains(response, self.username2)
