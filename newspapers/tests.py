@@ -157,3 +157,10 @@ class PrivateTestNewspaperListView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, title1)
         self.assertNotContains(response, title2)
+
+
+class PublicTestNewspaperDetailView(TestCase):
+    def test_login_required(self):
+        url = reverse("newspapers:newspaper-detail", args=(1,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
