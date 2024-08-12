@@ -110,3 +110,10 @@ class PrivateTestRedactorListView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.username1)
         self.assertNotContains(response, self.username2)
+
+
+class PublicTestRedactorDetailView(TestCase):
+    def test_login_required(self):
+        url = reverse("newspapers:redactor-detail", args=(1,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
