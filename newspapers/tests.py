@@ -117,3 +117,10 @@ class PublicTestRedactorDetailView(TestCase):
         url = reverse("newspapers:redactor-detail", args=(1,))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
+
+
+class PublicTestTopicListView(TestCase):
+    def test_login_required(self):
+        url = reverse("newspapers:topics")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
