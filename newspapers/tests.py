@@ -82,3 +82,10 @@ class PrivateTestIndexView(TestCase):
         response = self.client.get(url)
         bs = BeautifulSoup(response.content, "html.parser")
         self.assertEqual(bs.find(id="logged_in_visit_count").text, "2")
+
+
+class PublicTestRedactorListView(TestCase):
+    def test_login_required(self):
+        url = reverse("newspapers:redactors")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
