@@ -38,6 +38,11 @@
                     </li>
                 {% endif %}
             </ul>
+        <label for="page-number-input">Page:</label>
+        <div class="d-flex">
+            <input id="page-number-input" class="textinput form-control" size="1">
+            <input class="btn btn-primary rounded" type="button" value="Go">
+        </div>
         </nav>
         <div class="fw-normal small mt-4 mt-lg-0">
             Showing <b>{{ page_obj.object_list|length }}</b>
