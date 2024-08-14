@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 from django.views import generic
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Redactor, Topic, Newspaper, VisitCounter
@@ -103,3 +103,13 @@ class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
     form_class = NewspaperForm
     success_url = reverse_lazy("newspapers:newspapers")
+
+
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Newspaper
+    form_class = NewspaperForm
+
+    def get_success_url(self):
+        return reverse(
+            "newspapers:newspaper-detail", args=(self.get_object().id,)
+        )
