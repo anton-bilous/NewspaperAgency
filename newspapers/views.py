@@ -100,6 +100,6 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
-    template_name = "newspapers/newspaper_form.html"
+    model = Newspaper
     form_class = NewspaperForm
     success_url = reverse_lazy("newspapers:newspapers")
