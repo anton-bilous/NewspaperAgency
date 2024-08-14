@@ -27,7 +27,12 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-header">
-						<h1>{{ newspaper.title }}</h1>
+						<h1>
+							{{ newspaper.title }}
+							<a href="{% url 'newspapers:newspaper-update' newspaper.id %}" class="btn btn-primary float-end rounded">
+								<i class="feather icon-edit"></i>
+							</a>
+						</h1>
 					</div>
 					<div class="card-body">
 						<p class="mb-4">{{ newspaper.content }}</p>
