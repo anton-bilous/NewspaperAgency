@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load join_as_strings %}
 {% block content %}
 
 <!-- [ Main Content ] start -->
@@ -36,6 +37,9 @@
 					</div>
 					<div class="card-body">
 						<p class="mb-4">{{ newspaper.content }}</p>
+					</div>
+					<div class="card-footer">
+						<h5>Published by: {{ newspaper.publishers.all|join_as_strings:", " }}</h5>
 					</div>
 				</div>
 			</div>
