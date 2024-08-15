@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.contrib.auth import get_user_model
 
 from .models import Topic, Newspaper
+from .views import NewspaperUpdateView
 
 
 DEFAULT_USER_DATA = {
@@ -178,3 +179,15 @@ class PublicTestNewspaperUpdateView(TestCase):
         url = reverse("newspapers:newspaper-update", args=(1,))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
+
+    def test_success_url(self):
+        topic = Topic.objects.create(name="Test topic")
+        newspaper = Newspaper.objects.create(
+            title="Test newspaper", topic=topic, content="Abc"
+        )
+        view = NewspaperUpdateView(kwargs={"pk": newspaper.id})
+
+        self.assertEqual(
+            view.get_success_url(),
+            reverse("newspapers:newspaper-detail", args=(newspaper.id,)),
+        )
