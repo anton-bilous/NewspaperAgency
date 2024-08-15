@@ -171,3 +171,10 @@ class PublicTestNewspaperCreateView(TestCase):
         url = reverse("newspapers:newspaper-create")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
+
+
+class PublicTestNewspaperUpdateView(TestCase):
+    def test_login_required(self):
+        url = reverse("newspapers:newspaper-update", args=(1,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
