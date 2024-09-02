@@ -36,6 +36,8 @@ SECRET_KEY = os.getenv(
 ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
+if "HOST" in os.environ:
+    ALLOWED_HOSTS.append(os.environ["HOST"])
 
 
 # Application definition
