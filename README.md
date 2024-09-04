@@ -62,3 +62,9 @@ A website about newspaper agency
      ```bash
      python -m gunicorn newspaper_agency.asgi:application -k uvicorn.workers.UvicornWorker --certfile cert.crt --keyfile cert.key
      ```
+
+## Features
+- Newspaper management
+- Search
+- Chart of recent newspapers
+- Chart of home page visits
