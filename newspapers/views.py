@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 
 from django.views import generic
+from django.db.models import Count
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,14 +17,17 @@ def index(request):
     visit_counter.save()
 
     now = date.today()
-    dates = []
-    counts = []
-    for day in range(6, -1, -1):
-        day_to_check = now - timedelta(days=day)
-        dates.append(day_to_check.strftime("%Y-%m-%d"))
-        counts.append(
-            Newspaper.objects.filter(published_date=day_to_check).count()
-        )
+    dates = [now - timedelta(days=day) for day in range(6, -1, -1)]
+    counts = (
+        Newspaper.objects.filter(published_date__gte=dates[0])
+        .values("published_date")
+        .annotate(newspaper_count=Count("*"))
+    )
+    counts = {
+        count["published_date"]: count["newspaper_count"] for count in counts
+    }
+    counts = [counts.get(newspapers_date, 0) for newspapers_date in dates]
+    dates = [newspapers_date.strftime("%Y-%m-%d") for newspapers_date in dates]
 
     context = {
         "num_redactors": Redactor.objects.count(),
