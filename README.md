@@ -1,5 +1,11 @@
 # NewspaperAgency
-A website about newspaper agency
+A website about newspaper agency.
+The site is available [here](https://newspaperagency-hxls.onrender.com/).
+
+Credentials for testing:
+
+- Username: someuser
+- Password: s0m3 passw0rd
 
 ## How to run the project?
 
