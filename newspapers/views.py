@@ -58,7 +58,7 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         form = RedactorSearchForm(self.request.GET)
 
-        queryset = Redactor.objects.all()
+        queryset = super().get_queryset()
         if form.is_valid():
             return queryset.filter(
                 username__icontains=form.cleaned_data["username"]
@@ -93,7 +93,7 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         form = NewspaperSearchForm(self.request.GET)
 
-        queryset = Newspaper.objects.select_related("topic")
+        queryset = super().get_queryset().select_related("topic")
         if form.is_valid():
             return queryset.filter(title__icontains=form.cleaned_data["title"])
         return queryset
