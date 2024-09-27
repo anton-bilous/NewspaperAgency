@@ -1,0 +1,100 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<!-- [ Main Content ] start -->
+<div class="row">
+    <!-- order-card start -->
+    <div class="col-md-6 col-xl-3">
+        <a href="{% url 'newspapers:redactors' %}">
+            <div class="card bg-c-blue order-card">
+                <div class="card-body">
+                    <h6 class="text-white">Redactors</h6>
+                    <h2 class="text-end text-white"><i class="feather icon-users float-start"></i><span>{{ num_redactors }}</span></h2>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <a href="{% url 'newspapers:topics' %}">
+            <div class="card bg-c-green order-card">
+                <div class="card-body">
+                    <h6 class="text-white">Topics</h6>
+                    <h2 class="text-end text-white"><i class="feather icon-tag float-start"></i><span>{{ num_topics }}</span>
+                    </h2>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <a href="{% url 'newspapers:newspapers' %}">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-body">
+                    <h6 class="text-white">Newspapers</h6>
+                    <h2 class="text-end text-white"><i
+                            class="feather icon-file-text float-start"></i><span>{{ num_newspapers }}</span></h2>
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- order-card end -->
+    <!-- users visite start -->
+    <div class="col-md-12 col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <h1>
+                  NEWSPAPERS PUBLISHED
+                </h1>
+            </div>
+            <div class="card-body ps-0 pb-0">
+                <div id="newspapers-chart"></div>
+            </div>
+            <input id="dates" type="hidden" value="{% for date in dates %}{{ date }} {% endfor %}">
+            <input id="newspaper_counts" type="hidden" value="{% for count in newspaper_counts %}{{ count }} {% endfor %}">
+        </div>
+    </div>
+    <div class="col-md-12 col-xl-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body bg-patern">
+                        <div class="row">
+                            <div class="col-auto">
+                                <span>Visits</span>
+                            </div>
+                            <div class="col text-end">
+                                <h2 class="mb-0">{{ total_visit_count }}</h2>
+                            </div>
+                        </div>
+                        <div id="visits-chart"></div>
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <h3 class="m-0">
+                                    <i class="fas fa-circle f-10 m-r-5 text-success"></i>
+                                    <span id="logged_in_visit_count">{{ logged_in_visit_count }}</span>
+                                </h3>
+                                <span class="ms-3">Logged in</span>
+                            </div>
+                            <div class="col-auto">
+                                <h3 class="m-0">
+                                    <i class="fas fa-circle text-primary f-10 m-r-5"></i>
+                                    <span id="anonymous_visit_count">{{ anonymous_visit_count }}</span>
+                                </h3>
+                                <span class="ms-3">Anonymous</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- users visite end -->
+
+</div>
+<!-- [ Main Content ] end -->
+{% endblock content %}
+{% block extrajs %}
+<!-- custom-chart js -->
+<script src="{% static 'assets/js/pages/dashboard-main-custom.js' %}"></script>
+<!-- Apex Chart -->
+<script src="{% static 'assets/js/plugins/apexcharts.min.js' %}"></script>
+{% endblock extrajs %}
